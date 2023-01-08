@@ -1,23 +1,23 @@
 import React from "react";
 import './App.css';
-import savedMeme from "./savedMeme";
+import SavedMeme from "./SavedMeme";
 
-function memeBuilder(){
-  class memeBuilder extends React.Component {
+function MemeBuilder(){
+  class MemeBuilder extends React.Component {
   state = {
     newMeme: [],
-    savedMeme: []
+    SavedMeme: []
   }
 
   // CREATES NEW MEME IN ARRAY
   handleSave = (event) => {
     event.preventDefault()
     this.setState(prevState => ({
-      savedMeme: [{
+      SavedMeme: [{
         ...prevState.newMeme,
         btnTextChange: "Edit",
         textDisabled: "disabled"
-      }, ...prevState.savedMeme]
+      }, ...prevState.SavedMeme]
     }))
     this.clearInputs()
   }
@@ -58,7 +58,7 @@ function memeBuilder(){
   }
   // CHANGE EDIT BTN TO SAVE
   handleBtnEdit = (id) => {
-    const updatedMemes = this.state.savedMeme.map(item => {
+    const updatedMemes = this.state.SavedMeme.map(item => {
       if (item.id === id && item.btnTextChange === "Edit") {
         item.btnTextChange = "Save"
         item.textDisabled = ""
@@ -68,33 +68,33 @@ function memeBuilder(){
       }
       return item
     })
-    this.setState({ savedMeme: updatedMemes })
+    this.setState({ SavedMeme: updatedMemes })
   }
   // DELETE BTN
   handleBtnDelete = (id) => {
-    const updatedMemes = this.state.savedMeme.filter(item => item.id !== id)
-    this.setState({ savedMeme: updatedMemes })
+    const updatedMemes = this.state.SavedMeme.filter(item => item.id !== id)
+    this.setState({ SavedMeme: updatedMemes })
   } // NO NEED event.preventDefault() DUE TO METHOD CALL FROM CHILD 
 
   // TEXTAREA CHANGES
   handleTextEditTop = (id, updatedTopText) => {
-    const updatedMemes = this.state.savedMeme.map(item => {
+    const updatedMemes = this.state.SavedMeme.map(item => {
       if (item.id === id) {
         item.topText = updatedTopText
       }
       return item
     })
-    this.setState(() => ({ savedMeme: updatedMemes }))
+    this.setState(() => ({ SavedMeme: updatedMemes }))
   }
 
   handleTextEditBottom = (id, updatedBottomText) => {
-    const updatedMemes = this.state.savedMeme.map(item => {
+    const updatedMemes = this.state.SavedMeme.map(item => {
       if (item.id === id) {
         item.bottomText = updatedBottomText
       }
       return item
     })
-    this.setState(() => ({ savedMeme: updatedMemes }))
+    this.setState(() => ({ SavedMeme: updatedMemes }))
   }
 
   // GENERATES UNIQUE KEY FOR SAVED MEMES
@@ -138,8 +138,8 @@ function memeBuilder(){
           </button>
         </form>
         <div className="savedSection">
-          {this.state.savedMeme.map((item, id) =>
-            <savedMeme
+          {this.state.SavedMeme.map((item, id) =>
+            <SavedMeme
               key={this.generateKey(id)}
               id={id}
               item={item}
@@ -152,4 +152,4 @@ function memeBuilder(){
     )
   }
 }}
-export default memeBuilder
+export default MemeBuilder

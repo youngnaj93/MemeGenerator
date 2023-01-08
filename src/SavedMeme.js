@@ -1,7 +1,7 @@
 import React from "react";
 
-function savedMeme(){
-class savedMeme extends React.Component {
+function SavedMeme(){
+class SavedMeme extends React.Component {
 
   btnDelete = (event) => {
     event.preventDefault()
@@ -64,4 +64,4 @@ class savedMeme extends React.Component {
 
 
 
-export default savedMeme;
+export default SavedMeme;
