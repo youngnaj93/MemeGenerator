@@ -1,7 +1,7 @@
 import React from "react";
 import './App.css';
-// import MemeImage from "./memeImage";
 // import savedMeme from "./savedMeme";
+import axios from "axios";
 
 function memeBuilder(){
   
@@ -24,40 +24,35 @@ function memeBuilder(){
   //   this.clearInputs()
   // }
 
-  // // CLEARS BUILDER MEME TEMPLATE AFTER SAVE 
-  // clearInputs = () => {
-  //   this.setState({
-  //     newMeme: {
-  //       bottomText: "",
-  //       topText: ""
-  //     }
-  //   })
-  // }
-
    // 1. CREATES & UPDATES MEME BEING BUILT
-   function handleBuildChange(event) {
-    const { name, value } = event.target
-    setMeme(prevState => ({
-      ...prevState,
-      [name]:value
-    })) 
-  }
 
-  const [memes, setAllMemes] = React.useState([])
-
-  function getMemeImage() {
-    const randomNumber = Math.floor(Math.random()* memes.length)
-  const url = memes[randomNumber].url
-    setAllMemes(prevState => ({
-      ...prevState,
-      randomImage: url
-    }))
-  }
+  const [memeData, setAllMemes] = React.useState([])
 
     React.useEffect(() => {
-      fetch("https://api.imgflip.com/get_memes").then(response => response.json()).then(data => setAllMemes(data.data.memes))
+      async function getMemes() {
+        axios.get("https://api.imgflip.com/get_memes")
+        .then(data => setAllMemes(data.data.data.memes))
+      }
+      getMemes()
     }, [])
 
+    function getMemeImage(event) {
+      event.preventDefault()
+      const randomNumber = Math.floor(Math.random() * memeData.length)
+      const url = memeData[randomNumber].url
+      setMeme(prevMeme => ({
+          ...prevMeme,
+          randomImage: url
+    }))}
+
+    function handleBuildChange(event) {
+  
+      const { name, value } = event.target
+      setMeme(prevState => ({
+        ...prevState,
+        [name]:value
+      })) 
+    }
   // // DISABLES MEME SAVE BTN
   // isSaveDisabled = () => {
   //   while (
@@ -136,7 +131,7 @@ function memeBuilder(){
             value="true"
             className="newImageButton"
             onClick={getMemeImage}
-          >New Image</button>
+          >Refresh Meme Image</button>
           {/* <button
             className="saveBtn"
             onClick={this.handleSave}

@@ -1,6 +1,6 @@
 import React from 'react';
 import './App.css';
-import MemeImage from './memeImage';
+// import MemeImage from './memeImage';
 import MemeBuilder from './memeBuilder';
 
 function App() {
@@ -8,7 +8,7 @@ function App() {
   return (
     <div>
      <MemeBuilder />
-      <MemeImage />
+      {/* <MemeImage /> */}
     </div>
   )
 }
