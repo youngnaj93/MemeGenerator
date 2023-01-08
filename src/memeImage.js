@@ -1,8 +1,8 @@
 import React from 'react';
-import axios from "../node_modules/axios"
+import axios from "axios"
 import './App.css';
-import MemeBuilder from "./MemeBuilder"
-import uniqid from ".../node_modules/uniqid"
+import MemeBuilder from "./memeBuilder"
+import uniqid from "uniqid"
 
 class MemeImage extends React.Component {
   // SELECTS AND CHANGES IMAGE

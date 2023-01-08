@@ -1,14 +1,14 @@
 import React from 'react';
 import './App.css';
-import memeImage from './memeImage';
-import memeBuilder from './memeBuilder';
+import MemeImage from './memeImage';
+import MemeBuilder from './memeBuilder';
 
 function App() {
 
   return (
     <div>
-     <memeBuilder />
-      <memeImage />
+     <MemeBuilder />
+      <MemeImage />
     </div>
   )
 }
