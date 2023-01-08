@@ -152,8 +152,8 @@ function memeBuilder(){
         </div> */}
         <div className="meme">
           <img src={Newmeme.randomImage} className="meme--image" alt=""/>
-          <h2 className="meme--topText">{Newmeme.topText}</h2>
-          <h2 className="meme--bottomText">{Newmeme.bottomText}</h2>
+          <h2 className="meme--Text top">{Newmeme.topText}</h2>
+          <h2 className="meme--Text bottom">{Newmeme.bottomText}</h2>
         </div>
       </div>
     )
