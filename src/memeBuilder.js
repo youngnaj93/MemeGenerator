@@ -1,5 +1,6 @@
 import React from "react";
 import './App.css';
+// import MemeImage from "./memeImage";
 // import savedMeme from "./savedMeme";
 
 function memeBuilder(){
@@ -7,7 +8,7 @@ function memeBuilder(){
   const [Newmeme,setMeme] = React.useState({
     topText: "",
     bottomText: "",
-    randomImage: "http://i.imgflip.com/1bij.jpg"
+    randomImage: "https://i.imgflip.com/26am.jpg"
   })
 
   // // CREATES NEW MEME IN ARRAY
@@ -39,14 +40,23 @@ function memeBuilder(){
     setMeme(prevState => ({
       ...prevState,
       [name]:value
-    }))
-      
-    
+    })) 
   }
 
+  const [memes, setAllMemes] = React.useState([])
+
   function getMemeImage() {
-    
+    const randomNumber = Math.floor(Math.random()* memes.length)
+  const url = memes[randomNumber].url
+    setAllMemes(prevState => ({
+      ...prevState,
+      randomImage: url
+    }))
   }
+
+    React.useEffect(() => {
+      fetch("https://api.imgflip.com/get_memes").then(response => response.json()).then(data => setAllMemes(data.data.memes))
+    }, [])
 
   // // DISABLES MEME SAVE BTN
   // isSaveDisabled = () => {
@@ -146,7 +156,7 @@ function memeBuilder(){
               btnDelete={this.handleBtnDelete} />)}
         </div> */}
         <div className="meme">
-          <img src="{Newmeme.random.image}" className="meme--image" alt=""/>
+          <img src={Newmeme.randomImage} className="meme--image" alt=""/>
           <h2 className="meme--topText">{Newmeme.topText}</h2>
           <h2 className="meme--bottomText">{Newmeme.bottomText}</h2>
         </div>
