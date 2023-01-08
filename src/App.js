@@ -1,14 +1,18 @@
 import React from 'react';
 import './App.css';
-import memeImage from './memeImage';
-import memeBuilder from './memeBuilder';
+import Header from './Header';
+import MemeImage from './MemeImage';
+import MemeBuilder from './memeBuilder';
 
 function App() {
 
   return (
     <div>
-     <memeBuilder />
-      <memeImage />
+      <Header />
+      <div className='app-container'>
+      <MemeBuilder />
+      <MemeImage />
+      </div>
     </div>
   )
 }
