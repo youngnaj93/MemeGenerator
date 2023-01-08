@@ -1,7 +1,6 @@
 import React from "react";
 
 function SavedMeme(){
-class SavedMeme extends React.Component {
 
   btnDelete = (event) => {
     event.preventDefault()
@@ -27,7 +26,6 @@ class SavedMeme extends React.Component {
       event.target.value)
   }
 
-  render() {
     return (
       <form className="savedMeme">
         <textarea
@@ -59,8 +57,8 @@ class SavedMeme extends React.Component {
       </form>
     )
   }
-}
-}
+
+
 
 
 
