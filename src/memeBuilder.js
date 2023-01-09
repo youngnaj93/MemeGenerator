@@ -4,7 +4,7 @@ import SavedMeme from "./SavedMeme";
 
 export default function MemeBuilder(){
   
-  const [memeList, setMemeList] = React.useState([])
+  const [memeList, setMemeList] = useState([])
   const [memeData, setAllMemes] = useState([])
   const [newMeme,setMeme] = useState({
     topText: "",
@@ -34,10 +34,12 @@ export default function MemeBuilder(){
     function handleBuildChange(event) {
   
       const { name, value } = event.target
-      setMeme(prevState => ({
-        ...prevState,
-        [name]:value
-      })) 
+      setMeme(prevState => {
+        return {
+          ...prevState,
+          [name]: value
+        }
+      }) 
     }  
 
       // CREATES NEW MEME IN ARRAY
@@ -52,6 +54,10 @@ export default function MemeBuilder(){
         
         
         function saveUpdatedMeme(memeId, updatedMeme) {
+
+          console.log("save updated meme called" )
+        console.log("Item to update ID: ", memeId )
+        console.log("Values to update with ", updatedMeme )
   
           setMemeList(prevList => {
               return prevList.map((currentMeme, index) => {
@@ -75,9 +81,9 @@ export default function MemeBuilder(){
       return <SavedMeme
                 key={index}
                 id={index}
-                topText={newMeme.topText}
-                bottomText={newMeme.bottomText}
-                memeImage={newMeme.randomImage}
+                topText={meme.topText}
+                bottomText={meme.bottomText}
+                memeImage={meme.randomImage}
                 // deleteMeme={deleteMeme}
                 // editMeme={editMeme}
                 saveUpdatedMeme={saveUpdatedMeme}
