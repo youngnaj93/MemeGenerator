@@ -89,7 +89,7 @@ button {
   cursor: pointer;
   grid-column: 1 /-1;
   color: white;
-  background: linear-gradient(90.41deg, #711F8D 1.14%, #A818DA 100%);
+  background: linear-gradient(180deg, rgb(145, 3, 3), rgba(193, 8, 24, 0.929));
 }
 input {
   align-items: center;
