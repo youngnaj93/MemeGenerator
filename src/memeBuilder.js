@@ -1,6 +1,6 @@
 import React from "react";
 import './App.css';
-// import savedMeme from "./savedMeme";
+// import SavedMeme from "./SavedMeme";
 import axios from "axios";
 
 function memeBuilder(){
@@ -53,54 +53,47 @@ function memeBuilder(){
         [name]:value
       })) 
     }
-  // // DISABLES MEME SAVE BTN
-  // isSaveDisabled = () => {
-  //   while (
-  //     (!this.state.newMeme.topText) &&
-  //     (!this.state.newMeme.bottomText)) {
-  //     return "disabled"
-  //   }
-  // }
-  // // CHANGE EDIT BTN TO SAVE
-  // handleBtnEdit = (id) => {
-  //   const updatedMemes = this.state.savedMeme.map(item => {
-  //     if (item.id === id && item.btnTextChange === "Edit") {
-  //       item.btnTextChange = "Save"
-  //       item.textDisabled = ""
-  //     } else if (item.id === id && item.btnTextChange === "Save") {
-  //       item.btnTextChange = "Edit"
-  //       item.textDisabled = "disabled"
-  //     }
-  //     return item
-  //   })
-  //   this.setState({ savedMeme: updatedMemes })
-  // }
-  // // DELETE BTN
-  // handleBtnDelete = (id) => {
-  //   const updatedMemes = this.state.savedMeme.filter(item => item.id !== id)
-  //   this.setState({ savedMeme: updatedMemes })
-  // } // NO NEED event.preventDefault() DUE TO METHOD CALL FROM CHILD 
+  }
+  // CHANGE EDIT BTN TO SAVE
+  handleBtnEdit = (id) => {
+    const updatedMemes = this.state.SavedMeme.map(item => {
+      if (item.id === id && item.btnTextChange === "Edit") {
+        item.btnTextChange = "Save"
+        item.textDisabled = ""
+      } else if (item.id === id && item.btnTextChange === "Save") {
+        item.btnTextChange = "Edit"
+        item.textDisabled = "disabled"
+      }
+      return item
+    })
+    this.setState({ SavedMeme: updatedMemes })
+  }
+  // DELETE BTN
+  handleBtnDelete = (id) => {
+    const updatedMemes = this.state.SavedMeme.filter(item => item.id !== id)
+    this.setState({ SavedMeme: updatedMemes })
+  } // NO NEED event.preventDefault() DUE TO METHOD CALL FROM CHILD 
 
-  // // TEXTAREA CHANGES
-  // handleTextEditTop = (id, updatedTopText) => {
-  //   const updatedMemes = this.state.savedMeme.map(item => {
-  //     if (item.id === id) {
-  //       item.topText = updatedTopText
-  //     }
-  //     return item
-  //   })
-  //   this.setState(() => ({ savedMeme: updatedMemes }))
-  // }
+  // TEXTAREA CHANGES
+  handleTextEditTop = (id, updatedTopText) => {
+    const updatedMemes = this.state.SavedMeme.map(item => {
+      if (item.id === id) {
+        item.topText = updatedTopText
+      }
+      return item
+    })
+    this.setState(() => ({ SavedMeme: updatedMemes }))
+  }
 
-  // handleTextEditBottom = (id, updatedBottomText) => {
-  //   const updatedMemes = this.state.savedMeme.map(item => {
-  //     if (item.id === id) {
-  //       item.bottomText = updatedBottomText
-  //     }
-  //     return item
-  //   })
-  //   this.setState(() => ({ savedMeme: updatedMemes }))
-  // }
+  handleTextEditBottom = (id, updatedBottomText) => {
+    const updatedMemes = this.state.SavedMeme.map(item => {
+      if (item.id === id) {
+        item.bottomText = updatedBottomText
+      }
+      return item
+    })
+    this.setState(() => ({ SavedMeme: updatedMemes }))
+  }
 
   // GENERATES UNIQUE KEY FOR SAVED MEMES
   // generateKey = (id) => {
@@ -139,9 +132,9 @@ function memeBuilder(){
             disabled={this.isSaveDisabled()}>Save Meme
           </button> */}
         </form>
-        {/* <div className="savedSection">
-          {this.state.savedMeme.map((item, id) =>
-            <savedMeme
+        <div className="savedSection">
+          {this.state.SavedMeme.map((item, id) =>
+            <SavedMeme
               key={this.generateKey(id)}
               id={id}
               item={item}
@@ -159,4 +152,4 @@ function memeBuilder(){
     )
   }
 
-export default memeBuilder
+export default MemeBuilder

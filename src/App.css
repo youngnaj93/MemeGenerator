@@ -1,3 +1,13 @@
+@import url('https://fonts.googleapis.com/css2?family=Open+Sans:wght@300&family=Roboto:ital,wght@0,100;0,300;0,400;1,100;1,300;1,400&display=swap');
+
+/* font-family: 'Open Sans', sans-serif;
+font-family: 'Roboto', sans-serif;
+ */
+
+ * {
+  box-sizing: border-box;
+}
+
 .meme {
   position: relative;
 }
@@ -33,6 +43,9 @@ form {
   margin-bottom: 17px;
 }
 
+body {
+  font-family: 'Roboto', sans-serif;
+}
 button {
   cursor: pointer;
   grid-column: 1 /-1;
@@ -42,4 +55,46 @@ button {
 input {
   align-items: center;
   
+@import url('https://fonts.googleapis.com/css2?family=Open+Sans:wght@300&family=Roboto:ital,wght@0,100;0,300;0,400;1,100;1,300;1,400&display=swap');
+
+/* font-family: 'Open Sans', sans-serif;
+font-family: 'Roboto', sans-serif;
+ */
+
+* {
+  box-sizing: border-box;
+}
+
+body {
+  font-family: 'Roboto', sans-serif;
+  
+}
+
+.app-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: .5rem 1rem 0;
+  background-image: linear-gradient(180deg, rgb(145, 3, 3), rgba(193, 8, 24, 0.929));
+  border-bottom: 2px solid rgb(208, 208, 208);
+}
+
+.app-title {
+  color: rgb(220, 220, 220);
+  text-shadow: 1px 1px 4px black;
+  letter-spacing: .8rem;
+  max-width: 100px;
+}
+
+.app-subheader {
+  margin: 0;
+  padding-right: 1rem;
+  font-size: 1.2rem;
+  color: #fff;
+  font-weight: 100;
+}
+
+.app-container {
+  background-image: linear-gradient(180deg, rgb(239, 239, 239), rgba(226, 226, 226, 0.929));
+  height: 100%;
 }

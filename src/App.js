@@ -1,14 +1,14 @@
 import React from 'react';
 import './App.css';
-// import MemeImage from './memeImage';
+import Header from './Header';
 import MemeBuilder from './memeBuilder';
 
 function App() {
 
   return (
     <div>
+      <Header/>
      <MemeBuilder />
-      {/* <MemeImage /> */}
     </div>
   )
 }
