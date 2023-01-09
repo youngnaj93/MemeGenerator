@@ -5,7 +5,7 @@ import axios from "axios";
 
 function MemeBuilder(){
   
-  const [Newmeme,setMeme] = useState({
+  const [newMeme,setMeme] = useState({
     topText: "",
     bottomText: "",
     randomImage: "https://i.imgflip.com/26am.jpg"
@@ -111,27 +111,27 @@ function MemeBuilder(){
     return (
       // MEME-BUILDER / SELECTS PIC AND ALLOWS INPUT
       <div>
-        <form>
+        <form className="meme-form">
           <input
             type="text"
             placeholder="Place Top Text Here"
-            className="topText"
+            className="top-text-input"
             name="topText"
             onChange={handleBuildChange}
-            value={Newmeme.topText} />
+            value={newMeme.topText} />
           <input
             type="text"
             placeholder="Place Bottom Text Here"
-            className="bottomText"
+            className="bottom-text-input"
             name="bottomText"
             onChange={handleBuildChange}
-            value={Newmeme.bottomText} />
+            value={newMeme.bottomText} />
           <button
             name="newImage"
             value="true"
-            className="newImageButton"
+            className="refresh-button"
             onClick={getMemeImage}
-          >Refresh Meme Image</button>
+          >New Image</button>
           {/* <button
             className="saveBtn"
             onClick={this.handleSave}
@@ -150,10 +150,10 @@ function MemeBuilder(){
               btnEdit={this.handleBtnEdit}
               btnDelete={this.handleBtnDelete} />)}
         </div> */}
-        <div className="meme">
-          <img src={Newmeme.randomImage} className="meme-image" alt=""/>
-          <h2 className="meme-text top">{Newmeme.topText}</h2>
-          <h2 className="meme-text bottom">{Newmeme.bottomText}</h2>
+        <div className="meme-container">
+          <img src={newMeme.randomImage} className="meme-image" alt=""/>
+          <h2 className="meme-text top">{newMeme.topText}</h2>
+          <h2 className="meme-text bottom">{newMeme.bottomText}</h2>
         </div>
       </div>
     )
