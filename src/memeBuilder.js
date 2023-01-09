@@ -142,7 +142,7 @@ function memeBuilder(){
               textEditBottom={this.handleTextEditBottom}
               btnEdit={this.handleBtnEdit}
               btnDelete={this.handleBtnDelete} />)}
-        </div> */}
+        </div> 
         <div className="meme">
           <img src={Newmeme.randomImage} className="meme--image" alt=""/>
           <h2 className="meme--Text top">{Newmeme.topText}</h2>
@@ -150,6 +150,6 @@ function memeBuilder(){
         </div>
       </div>
     )
-  }
+  
 
 export default MemeBuilder
