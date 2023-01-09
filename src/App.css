@@ -48,7 +48,7 @@ body {
   justify-content: space-around;
   padding: 1.8rem;
   margin: auto;
-  max-width: 500px;
+  max-width: 580px;
   border-radius: 20px;
   box-shadow: 0 3px 8px black;
   background-image: linear-gradient(180deg, rgb(145, 3, 3), rgba(193, 8, 24, 0.929));
@@ -106,4 +106,19 @@ button {
 
 .bottom {
   bottom: 0;
+}
+
+
+li {
+  list-style: none;
+}
+
+ul {
+  margin: 0;
+  padding: 0;
+}
+
+.saved-memes {
+ position: relative;
+  text-align: center;
 }

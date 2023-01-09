@@ -1,32 +1,18 @@
 import React, {useState, useEffect} from "react";
-import './App.css';
-// import savedMeme from "./savedMeme";
 import axios from "axios";
+import SavedMeme from "./SavedMeme";
 
-function MemeBuilder(){
+export default function MemeBuilder(){
   
+  const [memeList, setMemeList] = React.useState([])
+  const [memeData, setAllMemes] = useState([])
   const [newMeme,setMeme] = useState({
     topText: "",
     bottomText: "",
     randomImage: "https://i.imgflip.com/26am.jpg"
   })
 
-  // // CREATES NEW MEME IN ARRAY
-  // handleSave = (event) => {
-  //   event.preventDefault()
-  //   this.setState(prevState => ({
-  //     savedMeme: [{
-  //       ...prevState.newMeme,
-  //       btnTextChange: "Edit",
-  //       textDisabled: "disabled"
-  //     }, ...prevState.savedMeme]
-  //   }))
-  //   this.clearInputs()
-  // }
 
-   // 1. CREATES & UPDATES MEME BEING BUILT
-
-  const [memeData, setAllMemes] = useState([])
 
     useEffect(() => {
       async function getMemes() {
@@ -52,61 +38,94 @@ function MemeBuilder(){
         ...prevState,
         [name]:value
       })) 
-    }
-  // // DISABLES MEME SAVE BTN
-  // isSaveDisabled = () => {
-  //   while (
-  //     (!this.state.newMeme.topText) &&
-  //     (!this.state.newMeme.bottomText)) {
-  //     return "disabled"
-  //   }
-  // }
-  // // CHANGE EDIT BTN TO SAVE
-  // handleBtnEdit = (id) => {
-  //   const updatedMemes = this.state.savedMeme.map(item => {
-  //     if (item.id === id && item.btnTextChange === "Edit") {
-  //       item.btnTextChange = "Save"
-  //       item.textDisabled = ""
-  //     } else if (item.id === id && item.btnTextChange === "Save") {
-  //       item.btnTextChange = "Edit"
-  //       item.textDisabled = "disabled"
-  //     }
-  //     return item
-  //   })
-  //   this.setState({ savedMeme: updatedMemes })
-  // }
-  // // DELETE BTN
-  // handleBtnDelete = (id) => {
-  //   const updatedMemes = this.state.savedMeme.filter(item => item.id !== id)
-  //   this.setState({ savedMeme: updatedMemes })
-  // } // NO NEED event.preventDefault() DUE TO METHOD CALL FROM CHILD 
+    }  
 
-  // // TEXTAREA CHANGES
-  // handleTextEditTop = (id, updatedTopText) => {
-  //   const updatedMemes = this.state.savedMeme.map(item => {
-  //     if (item.id === id) {
-  //       item.topText = updatedTopText
-  //     }
-  //     return item
-  //   })
-  //   this.setState(() => ({ savedMeme: updatedMemes }))
-  // }
+      // CREATES NEW MEME IN ARRAY
+      function saveMeme(event) {
+        event.preventDefault()
+        console.log(newMeme)
+        setMemeList(memeList => ([
+                newMeme,
+                ...memeList
+            ]))
+        } 
+        
+        
+        function saveUpdatedMeme(memeId, updatedMeme) {
+  
+          setMemeList(prevList => {
+              return prevList.map((currentMeme, index) => {
+                  if(index === memeId) { 
+                      return {
+                          topText: updatedMeme.topText, 
+                          bottomText: updatedMeme.bottomText,
+                          randomImage: currentMeme.randomImage
+                      }
+                  }
+                  else { 
+                      return currentMeme
+                  }
+              })
+          })
+      }
 
-  // handleTextEditBottom = (id, updatedBottomText) => {
-  //   const updatedMemes = this.state.savedMeme.map(item => {
-  //     if (item.id === id) {
-  //       item.bottomText = updatedBottomText
-  //     }
-  //     return item
-  //   })
-  //   this.setState(() => ({ savedMeme: updatedMemes }))
-  // }
 
-  // GENERATES UNIQUE KEY FOR SAVED MEMES
-  // generateKey = (id) => {
-  //   return `${id}_${Math.floor(Math.random())}`;
-  // }
 
+    const savedMemes = memeList.map((meme, index) => {
+      return <SavedMeme
+                key={index}
+                id={index}
+                topText={newMeme.topText}
+                bottomText={newMeme.bottomText}
+                memeImage={newMeme.randomImage}
+                // deleteMeme={deleteMeme}
+                // editMeme={editMeme}
+                saveUpdatedMeme={saveUpdatedMeme}
+                memeList={memeList}
+      />
+
+    })
+
+    
+    // const handleBtnEdit = (id) => {
+    //   const updatedMemes = this.state.SavedMeme.map(item => {
+    //     if (item.id === id && item.btnTextChange === "Edit") {
+    //       item.btnTextChange = "Save"
+    //       item.textDisabled = ""
+    //     } else if (item.id === id && item.btnTextChange === "Save") {
+    //       item.btnTextChange = "Edit"
+    //       item.textDisabled = "disabled"
+    //     }
+    //     return item
+    //   })
+    //   this.setState({ SavedMeme: updatedMemes })
+    // }
+    // // DELETE BTN
+    // const handleBtnDelete = (id) => {
+    //   const updatedMemes = this.state.SavedMeme.filter(item => item.id !== id)
+    //   this.setState({ SavedMeme: updatedMemes })
+    // } // NO NEED event.preventDefault() DUE TO METHOD CALL FROM CHILD 
+  
+    // // TEXTAREA CHANGES
+    // const handleTextEditTop = (id, updatedTopText) => {
+    //   const updatedMemes = this.state.SavedMeme.map(item => {
+    //     if (item.id === id) {
+    //       item.topText = updatedTopText
+    //     }
+    //     return item
+    //   })
+    //   this.setState(() => ({ SavedMeme: updatedMemes }))
+    // }
+  
+    // const handleTextEditBottom = (id, updatedBottomText) => {
+    //   const updatedMemes = this.state.SavedMeme.map(item => {
+    //     if (item.id === id) {
+    //       item.bottomText = updatedBottomText
+    //     }
+    //     return item
+    //   })
+    //   this.setState(() => ({ SavedMeme: updatedMemes }))
+    // }
   
     return (
       // MEME-BUILDER / SELECTS PIC AND ALLOWS INPUT
@@ -132,12 +151,12 @@ function MemeBuilder(){
             className="refresh-button"
             onClick={getMemeImage}
           >New Image</button>
-          {/* <button
+          <button
             className="saveBtn"
-            onClick={this.handleSave}
-            onMouseUp={this.props.refresh}
-            disabled={this.isSaveDisabled()}>Save Meme
-          </button> */}
+            onClick={saveMeme}
+            // onMouseUp={this.props.refresh}
+            // disabled={this.isSaveDisabled()}
+            >Save Meme</button>
         </form>
         {/* <div className="savedSection">
           {this.state.savedMeme.map((item, id) =>
@@ -155,8 +174,10 @@ function MemeBuilder(){
           <h2 className="meme-text top">{newMeme.topText}</h2>
           <h2 className="meme-text bottom">{newMeme.bottomText}</h2>
         </div>
+        <div className="saved-memes">
+          {savedMemes}
+        </div>
       </div>
     )
   }
 
-export default MemeBuilder
