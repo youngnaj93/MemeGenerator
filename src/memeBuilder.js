@@ -1,59 +1,57 @@
 import React from "react";
 import './App.css';
-import SavedMeme from "./SavedMeme";
+// import SavedMeme from "./SavedMeme";
+import axios from "axios";
 
-function MemeBuilder(){
-  class MemeBuilder extends React.Component {
-  state = {
-    newMeme: [],
-    SavedMeme: []
-  }
+function memeBuilder(){
+  
+  const [Newmeme,setMeme] = React.useState({
+    topText: "",
+    bottomText: "",
+    randomImage: "https://i.imgflip.com/26am.jpg"
+  })
 
-  // CREATES NEW MEME IN ARRAY
-  handleSave = (event) => {
-    event.preventDefault()
-    this.setState(prevState => ({
-      SavedMeme: [{
-        ...prevState.newMeme,
-        btnTextChange: "Edit",
-        textDisabled: "disabled"
-      }, ...prevState.SavedMeme]
-    }))
-    this.clearInputs()
-  }
+  // // CREATES NEW MEME IN ARRAY
+  // handleSave = (event) => {
+  //   event.preventDefault()
+  //   this.setState(prevState => ({
+  //     savedMeme: [{
+  //       ...prevState.newMeme,
+  //       btnTextChange: "Edit",
+  //       textDisabled: "disabled"
+  //     }, ...prevState.savedMeme]
+  //   }))
+  //   this.clearInputs()
+  // }
 
-  // CLEARS BUILDER MEME TEMPLATE AFTER SAVE 
-  clearInputs = () => {
-    this.setState({
-      newMeme: {
-        bottomText: "",
-        topText: ""
+   // 1. CREATES & UPDATES MEME BEING BUILT
+
+  const [memeData, setAllMemes] = React.useState([])
+
+    React.useEffect(() => {
+      async function getMemes() {
+        axios.get("https://api.imgflip.com/get_memes")
+        .then(data => setAllMemes(data.data.data.memes))
       }
-    })
-  }
+      getMemes()
+    }, [])
 
-  // 1. CREATES & UPDATES MEME BEING BUILT
-  handleBuildChange = (event) => {
-    event.preventDefault()
-    const { name, value } = event.target
-    this.setState((prevState) => ({
-      newMeme:
-      {
-        ...prevState.newMeme,
-        [name]: value,
-        name: this.props.name,
-        url: this.props.url,
-        id: this.props.id
-      }
-    }))
-  }
+    function getMemeImage(event) {
+      event.preventDefault()
+      const randomNumber = Math.floor(Math.random() * memeData.length)
+      const url = memeData[randomNumber].url
+      setMeme(prevMeme => ({
+          ...prevMeme,
+          randomImage: url
+    }))}
 
-  // DISABLES MEME SAVE BTN
-  isSaveDisabled = () => {
-    while (
-      (!this.state.newMeme.topText) &&
-      (!this.state.newMeme.bottomText)) {
-      return "disabled"
+    function handleBuildChange(event) {
+  
+      const { name, value } = event.target
+      setMeme(prevState => ({
+        ...prevState,
+        [name]:value
+      })) 
     }
   }
   // CHANGE EDIT BTN TO SAVE
@@ -98,44 +96,41 @@ function MemeBuilder(){
   }
 
   // GENERATES UNIQUE KEY FOR SAVED MEMES
-  generateKey = (id) => {
-    return `${id}_${Math.floor(Math.random())}`;
-  }
+  // generateKey = (id) => {
+  //   return `${id}_${Math.floor(Math.random())}`;
+  // }
 
-  render() {
+  
     return (
       // MEME-BUILDER / SELECTS PIC AND ALLOWS INPUT
       <div>
         <form>
-          <textarea
-            placeholder="Place Text Here"
+          <input
+            type="text"
+            placeholder="Place Top Text Here"
             className="topText"
             name="topText"
-            onChange={this.handleBuildChange}
-            value={this.state.newMeme.topText} />
-          <img
-            src={this.props.url}
-            alt={this.props.name}
-          />
-          <textarea
-            placeholder="Place Text Here"
+            onChange={handleBuildChange}
+            value={Newmeme.topText} />
+          <input
+            type="text"
+            placeholder="Place Bottom Text Here"
             className="bottomText"
             name="bottomText"
-            onChange={this.handleBuildChange}
-            value={this.state.newMeme.bottomText} />
+            onChange={handleBuildChange}
+            value={Newmeme.bottomText} />
           <button
-            name="refresh"
+            name="newImage"
             value="true"
-            className="refreshBtn"
-            onMouseUp={this.props.refresh}
-            onClick={this.handleBuildChange}
-          >Refresh Image</button>
-          <button
+            className="newImageButton"
+            onClick={getMemeImage}
+          >Refresh Meme Image</button>
+          {/* <button
             className="saveBtn"
             onClick={this.handleSave}
             onMouseUp={this.props.refresh}
             disabled={this.isSaveDisabled()}>Save Meme
-          </button>
+          </button> */}
         </form>
         <div className="savedSection">
           {this.state.SavedMeme.map((item, id) =>
@@ -147,9 +142,14 @@ function MemeBuilder(){
               textEditBottom={this.handleTextEditBottom}
               btnEdit={this.handleBtnEdit}
               btnDelete={this.handleBtnDelete} />)}
+        </div> 
+        <div className="meme">
+          <img src={Newmeme.randomImage} className="meme--image" alt=""/>
+          <h2 className="meme--Text top">{Newmeme.topText}</h2>
+          <h2 className="meme--Text bottom">{Newmeme.bottomText}</h2>
         </div>
       </div>
     )
-  }
-}}
+  
+
 export default MemeBuilder

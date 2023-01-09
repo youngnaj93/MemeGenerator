@@ -27,7 +27,7 @@ class SavedMeme extends React.Component {
       event.target.value)
   }
 
-  render() {
+  render(
     return (
       <form className="savedMeme">
         <textarea
@@ -58,9 +58,11 @@ class SavedMeme extends React.Component {
         </div>
       </form>
     )
+  )
   }
-}
-}
+
+
+
 
 
 
