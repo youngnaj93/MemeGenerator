@@ -48,9 +48,11 @@ function App(props) {
     <div>
       <Header/>
      <MemeBuilder submit={addNewItem} />
-     <hr/><br></br>
-      <h2 className="saved-memes">Saved Memes List</h2>
+     <hr/>
+     <h2 className="saved-title">Saved Memes List</h2>
+      <div className='meme-list'>
       {savedMemes}
+      </div>
     </div>
   )
 }

@@ -39,10 +39,6 @@ body {
   font-weight: 100;
 }
 
-.app-container {
-  
-}
-
 .meme-form {
   display: flex;
   justify-content: space-around;
@@ -70,10 +66,18 @@ button {
   border-radius: 40px;
   color: rgb(220, 220, 220);
   background-image: linear-gradient(90deg, rgb(54, 54, 54), rgb(117, 114, 114), rgb(54, 54, 54));
-  
+  transition: all ease-in-out .5s;
+}
+
+button:hover {
+  background-image: linear-gradient(90deg, rgb(102, 102, 102), rgb(117, 114, 114), rgb(177, 177, 177));
 }
 
 .meme-container {
+  margin-bottom: 2rem;
+}
+
+.meme-container, .saved-meme-container {
   position: relative;
   text-align: center;
   color: white;
@@ -84,7 +88,7 @@ button {
   max-width: 100%;
   margin-top: 1rem;
   border-radius: 20px;
-  box-shadow: 0 3px 8px black;;
+  box-shadow: 0 3px 8px black;
 }
 
 .meme-text {
@@ -109,6 +113,8 @@ button {
 }
 
 
+
+
 li {
   list-style: none;
 }
@@ -118,7 +124,52 @@ ul {
   padding: 0;
 }
 
-.saved-memes {
+.saved-title {
  position: relative;
   text-align: center;
+  padding: 2rem;
+  font-size: 2.5rem;
+  color: rgb(130, 8, 8);
+  text-shadow: 1px 1px 4px rgb(147, 147, 147);
+  letter-spacing: .2rem;
+}
+
+.saved-meme-container {
+  display: block;
+}
+
+.button-container {
+  display: flex;
+  margin: 0 30%;
+  justify-content: space-around;
+}
+
+.meme-list {
+  display: flex;
+  justify-content: space-evenly;
+  flex-wrap: wrap;
+  gap: 1rem;
+  padding-bottom: 8rem;
+
+}
+
+.saved-memes {
+  box-shadow: 2px 2px 6px rgb(102, 102, 102);
+  background-image: linear-gradient(180deg, grey, rgb(207, 207, 207));
+  padding: 2rem;
+  border-radius: 20px;
+  width: 400px;
+  display: block;
+  width: 400px;
+}
+
+.edit-form {
+  display: inline-block;
+  margin: auto;
+  text-align: center;
+  padding: .5rem;
+}
+
+.submit-button {
+  margin-top: 1rem;
 }

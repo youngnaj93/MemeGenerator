@@ -35,7 +35,7 @@ export default function SavedMeme(props) {
 
 
   return (
-      <div className="meme--list">
+      <div className="saved-memes">
           
           {showForm ? 
               <form className="edit-form" onSubmit={handleSubmit}>
@@ -53,21 +53,25 @@ export default function SavedMeme(props) {
                       value={meme.bottomText}
                       onChange={handleChange}
                   />
-                  <img src={meme.randomImage} className="meme--image" alt=""/>
-                  <button>Submit</button>
+                  <img src={meme.randomImage} className="meme-image" alt=""/>
+                  <button className="submit-button">Submit</button>
               </form>
           :
           <>
-              <div className="meme-container">
-                  <img src={meme.randomImage} className="meme--image" alt="" />
+              <div className="saved-meme-container">
+                  <img src={meme.randomImage} className="meme-image" alt="" />
                   <h2 className="meme-text top"> {meme.topText} </h2>{" "}
                   <h2 className="meme-text bottom"> {meme.bottomText} </h2>{" "}
               </div>{" "}
           </>
           }
-          <button onClick={toggleShowForm}>{showForm ? "Close" : "Edit"}</button>
-          <br></br>
-          <button onClick={()=> {props.deleteMemeImage(props.id)}}>Delete</button>
+
+                <div className="button-container">
+                    <button className="edit-button" onClick={toggleShowForm}>{showForm ? "Close" : "Edit"}</button>
+                    <button className="delete-button" onClick={()=> {props.deleteMemeImage(props.id)}}>Delete</button>
+                </div>
+          
+          
       </div>
   );
 }
